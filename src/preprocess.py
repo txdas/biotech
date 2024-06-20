@@ -3,8 +3,8 @@ import json
 import jsonlines
 from Bio import SeqIO
 from io import StringIO
-from uniprot import UniprotClient
-from niofold import AlphaFold
+from nio.uniprot import UniprotClient
+from nio.niofold import AlphaFold
 from tqdm import tqdm
 import requests
 import warnings
