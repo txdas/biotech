@@ -61,7 +61,8 @@ def vindex(fpath="/Users/john/Downloads"):
                 wp.write(title+"\n")
 
 
-def find(key,fpath="/Users/john/Downloads"):
+def find(key, fpath="/Users/john/Downloads"):
+    wp = open("./index.txt","w")
     for root, dirs, files in os.walk(fpath):
         findex = os.path.join(root, "index.txt")
         if not os.path.exists(findex) or "name" in root:
@@ -69,10 +70,10 @@ def find(key,fpath="/Users/john/Downloads"):
         with open(findex) as fp:
             for line in fp:
                 if key in line:
-                    print(line.strip())
+                    wp.write(line.strip()+"\n")
 
 
-def symlink(fpath="/Volumes/Extreme SSD/nuit/name", target="/Volumes/Extreme SSD/nuit/"):
+def symlink(fpath="/Volumes/Extreme SSD/name/枫ふうあ", target="/Volumes/Extreme SSD/nuit/"):
     fnames = {}
     for root, dirs, files in os.walk(fpath):
         for f in files:
@@ -80,8 +81,9 @@ def symlink(fpath="/Volumes/Extreme SSD/nuit/name", target="/Volumes/Extreme SSD
                 findex = os.path.join(root,f)
                 with open(findex) as fp:
                     for line in fp:
-                        fname = line.strip().split()[0].upper()
-                        fnames[fname]=root
+                        if line.strip():
+                            fname = line.strip().split()[0].upper()
+                            fnames[fname]=root
     for root, dirs, files in os.walk(target):
         for f in files:
             kname = f.split(".")[0].strip().upper()
@@ -97,9 +99,9 @@ def symlink(fpath="/Volumes/Extreme SSD/nuit/name", target="/Volumes/Extreme SSD
 
 
 if __name__ == '__main__':
-    # vindex(fpath="/Volumes/Extreme SSD/nuit/name/白桃花")
-    # find(key="凉森",fpath="/Volumes/Extreme SSD/nuit")
-    symlink()
+    vindex(fpath="/Volumes/Extreme SSD/nuit/miaa")
+    # find(key="枫",fpath="/Volumes/Extreme SSD/nuit")
+    # symlink()
     # print(get_title("MIAA-019"))
 
 
