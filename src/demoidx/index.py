@@ -15,20 +15,21 @@ headers = {
 
 def _fetch(url, xpath, extra=None):
     res = requests.get(url, headers=headers, proxies=proxies)
+    # print(url, res)
     if res.status_code <= 400:
         res.encoding = 'utf-8'
         html = res.content
         selector = etree.HTML(html)  # etree.HTML(源码) 识别为可被xpath解析的对象
         nodes = selector.xpath(xpath)
-        return nodes[0]
+
+        return nodes[0] if nodes and len(nodes) else ""
 
 
 def get_title(code):
     url = f"https://missav.com/dm46/cn/{code}"
     xpath = "/html/head/meta[@property='og:title']"
     node = _fetch(url, xpath)
-    title = node.attrib.get("content")
-
+    title = node.attrib.get("content", "") if node is not None and hasattr(node,"attrib")  else ""
     if title:
         return title
     else:
@@ -39,7 +40,7 @@ def get_title(code):
             title = title.encode('iso-8859-1').decode("utf-8")
             return title
         url = f"https://missav.com/cn/search/{code}"
-        xpath = "/html/body/div[1]/div[3]/div[2]//a[@class='text-secondary group-hover:text-primary']"
+        xpath = "/html/body/div[1]/div[3]/div[2]/a[@class='text-secondary group-hover:text-primary']/text()"
         title = _fetch(url, xpath)
         return title
 
@@ -101,8 +102,10 @@ def symlink(fpath="/Volumes/Extreme SSD/name/枫ふうあ", target="/Volumes/Ext
 
 
 if __name__ == '__main__':
-    # print(get_title("ADN-520"))
-    vindex(fpath="/Volumes/Extreme SSD/tmp")
+    # print(get_title("DVRT-020"))
+    # vindex(fpath="/Volumes/Extreme SSD/nuit")
+    for name in ["ssni","hmn"]:
+        vindex(fpath=f"/Volumes/Extreme SSD/nuit/{name}")
     # find(key="枫",fpath="/Volumes/Extreme SSD/nuit")
     # symlink()
     # print(get_title("MIAA-019"))
