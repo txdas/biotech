@@ -24,17 +24,19 @@ def _fetch(url, xpath, extra=None):
 
 
 def get_title(code):
-    url = f"https://jable.tv/videos/{code}/?lang=zh"
-    xpath = "/html/head/title/text()"
-    title = _fetch(url, xpath)
+    url = f"https://missav.com/dm46/cn/{code}"
+    xpath = "/html/head/meta[@property='og:title']"
+    node = _fetch(url, xpath)
+    title = node.attrib.get("content")
+
     if title:
-        title = title.encode('iso-8859-1').decode("utf-8")
-        title = title.split(" - ")[0]
         return title
     else:
-        url = f"https://missav.com/dm46/cn/{code}"
+        url = f"https://jable.tv/videos/{code}/?lang=zh"
+        xpath = "/html/head/title/text()"
         title = _fetch(url, xpath)
         if title:
+            title = title.encode('iso-8859-1').decode("utf-8")
             return title
         url = f"https://missav.com/cn/search/{code}"
         xpath = "/html/body/div[1]/div[3]/div[2]//a[@class='text-secondary group-hover:text-primary']"
@@ -99,7 +101,8 @@ def symlink(fpath="/Volumes/Extreme SSD/name/枫ふうあ", target="/Volumes/Ext
 
 
 if __name__ == '__main__':
-    vindex(fpath="/Volumes/Extreme SSD/nuit/miaa")
+    # print(get_title("ADN-520"))
+    vindex(fpath="/Volumes/Extreme SSD/tmp")
     # find(key="枫",fpath="/Volumes/Extreme SSD/nuit")
     # symlink()
     # print(get_title("MIAA-019"))
