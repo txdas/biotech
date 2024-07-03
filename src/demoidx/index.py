@@ -45,7 +45,7 @@ def get_title(code):
         return title
 
 
-def vindex(fpath="/Users/john/Downloads"):
+def vindex(fpath="/Volumes/Extreme SSD/name/白石桃"):
     for root, dirs, files in os.walk(fpath):
         findex = os.path.join(root, "index.txt")
         titles = []
@@ -65,18 +65,22 @@ def vindex(fpath="/Users/john/Downloads"):
 
 
 def find(key, fpath="/Users/john/Downloads"):
-    wp = open("./index.txt","w")
+    # wp = open("./index.txt","w")
     for root, dirs, files in os.walk(fpath):
         findex = os.path.join(root, "index.txt")
-        if not os.path.exists(findex) or "name" in root:
+        if not os.path.exists(findex):
             continue
+
         with open(findex) as fp:
             for line in fp:
+
                 if key in line:
-                    wp.write(line.strip()+"\n")
+                    # print(findex)
+                    print(line.strip())
+                    # wp.write(line.strip()+"\n")
 
 
-def symlink(fpath="/Volumes/Extreme SSD/name/枫ふうあ", target="/Volumes/Extreme SSD/nuit/"):
+def symlink(fpath="/Volumes/Extreme SSD/name", target="/Volumes/Extreme SSD/nuit/"):
     fnames = {}
     for root, dirs, files in os.walk(fpath):
         for f in files:
@@ -103,12 +107,11 @@ def symlink(fpath="/Volumes/Extreme SSD/name/枫ふうあ", target="/Volumes/Ext
 
 if __name__ == '__main__':
     # print(get_title("DVRT-020"))
-    # vindex(fpath="/Volumes/Extreme SSD/nuit")
-    for name in ["ssni","hmn"]:
-        vindex(fpath=f"/Volumes/Extreme SSD/nuit/{name}")
-    # find(key="枫",fpath="/Volumes/Extreme SSD/nuit")
-    # symlink()
-    # print(get_title("MIAA-019"))
+    # vindex(fpath=f"/Volumes/Extreme SSD/nuit/EBWH")
+    # for name in ["ssni","hmn"]:
+    #     vindex(fpath=f"/Volumes/Extreme SSD/nuit/{name}")
+    # find(key="七泽美亚", fpath="/Volumes/Extreme SSD/nuit")
+    symlink()
 
 
 
