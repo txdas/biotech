@@ -15,20 +15,21 @@ headers = {
 
 def _fetch(url, xpath, extra=None):
     res = requests.get(url, headers=headers, proxies=proxies)
+    # print(url, res)
     if res.status_code <= 400:
         res.encoding = 'utf-8'
         html = res.content
         selector = etree.HTML(html)  # etree.HTML(源码) 识别为可被xpath解析的对象
         nodes = selector.xpath(xpath)
-        return nodes[0]
+
+        return nodes[0] if nodes and len(nodes) else ""
 
 
 def get_title(code):
     url = f"https://missav.com/dm46/cn/{code}"
     xpath = "/html/head/meta[@property='og:title']"
     node = _fetch(url, xpath)
-    title = node.attrib.get("content")
-
+    title = node.attrib.get("content", "") if node is not None and hasattr(node,"attrib")  else ""
     if title:
         return title
     else:
@@ -39,12 +40,12 @@ def get_title(code):
             title = title.encode('iso-8859-1').decode("utf-8")
             return title
         url = f"https://missav.com/cn/search/{code}"
-        xpath = "/html/body/div[1]/div[3]/div[2]//a[@class='text-secondary group-hover:text-primary']"
+        xpath = "/html/body/div[1]/div[3]/div[2]/a[@class='text-secondary group-hover:text-primary']/text()"
         title = _fetch(url, xpath)
         return title
 
 
-def vindex(fpath="/Users/john/Downloads"):
+def vindex(fpath="/Volumes/Extreme SSD/name/白石桃"):
     for root, dirs, files in os.walk(fpath):
         findex = os.path.join(root, "index.txt")
         titles = []
@@ -64,18 +65,22 @@ def vindex(fpath="/Users/john/Downloads"):
 
 
 def find(key, fpath="/Users/john/Downloads"):
-    wp = open("./index.txt","w")
+    # wp = open("./index.txt","w")
     for root, dirs, files in os.walk(fpath):
         findex = os.path.join(root, "index.txt")
-        if not os.path.exists(findex) or "name" in root:
+        if not os.path.exists(findex):
             continue
+
         with open(findex) as fp:
             for line in fp:
+
                 if key in line:
-                    wp.write(line.strip()+"\n")
+                    # print(findex)
+                    print(line.strip())
+                    # wp.write(line.strip()+"\n")
 
 
-def symlink(fpath="/Volumes/Extreme SSD/name/枫ふうあ", target="/Volumes/Extreme SSD/nuit/"):
+def symlink(fpath="/Volumes/Extreme SSD/name", target="/Volumes/Extreme SSD/nuit/"):
     fnames = {}
     for root, dirs, files in os.walk(fpath):
         for f in files:
@@ -101,11 +106,12 @@ def symlink(fpath="/Volumes/Extreme SSD/name/枫ふうあ", target="/Volumes/Ext
 
 
 if __name__ == '__main__':
-    # print(get_title("ADN-520"))
-    vindex(fpath="/Volumes/Extreme SSD/tmp")
-    # find(key="枫",fpath="/Volumes/Extreme SSD/nuit")
-    # symlink()
-    # print(get_title("MIAA-019"))
+    # print(get_title("DVRT-020"))
+    # vindex(fpath=f"/Volumes/Extreme SSD/nuit/EBWH")
+    # for name in ["ssni","hmn"]:
+    #     vindex(fpath=f"/Volumes/Extreme SSD/nuit/{name}")
+    # find(key="七泽美亚", fpath="/Volumes/Extreme SSD/nuit")
+    symlink()
 
 
 
