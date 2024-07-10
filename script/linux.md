@@ -24,6 +24,6 @@ c.NotebookApp.port =8989
 - user：jinyalong qs*@*a$8Rn
 ```bash
 scp -r -P 1204 DNABERT-2-117M jinyalong@113.64.244.23:/data/home/jinyalong/data/
-rsync -av -e 'ssh -p 1204' jinyalong@113.64.244.23:/data/home/jinyalong/data/Sev_240624/results /Users/john/data/sev 
+rsync -av -e 'ssh -p 1204' jinyalong@113.64.244.23:/data/home/jinyalong/data/sev_240222/results /Users/john/data/sev/sev_240222 
 cat DNA2.csv | grep "AACACGGG***TT" | awk -F, '{sum += $3};END {print sum}'
 ```

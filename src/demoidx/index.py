@@ -106,12 +106,12 @@ def symlink(fpath="/Volumes/Extreme SSD/name", target="/Volumes/Extreme SSD/nuit
 
 
 if __name__ == '__main__':
-    # print(get_title("DVRT-020"))
-    # vindex(fpath=f"/Volumes/Extreme SSD/nuit/EBWH")
+    # print(get_title("020"))
+    # vindex(fpath=f"/Volumes/Extreme SSD/nuit/MIRD")
     # for name in ["ssni","hmn"]:
     #     vindex(fpath=f"/Volumes/Extreme SSD/nuit/{name}")
-    # find(key="七泽美亚", fpath="/Volumes/Extreme SSD/nuit")
-    symlink()
+    find(key="觉醒", fpath="/Volumes/Extreme SSD/nuit") #
+    # symlink()
 
 
 
