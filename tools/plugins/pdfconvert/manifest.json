@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "网页转PDF",
+  "version": "1.0",
+  "description": "将当前网页导出为PDF",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["/js/jquery.min.js","/js/html2canvas.min.js","/js/jspdf.min.js","/js/content.js"]
+    }
+  ],
+  "permissions": ["activeTab", "scripting", "storage"]
+}

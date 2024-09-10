@@ -16,8 +16,9 @@ def run_one_example(fun, problem):
     response = fun(description)
     pure_code = extract_code(response)
     # 将生成的代码作为函数进行测试
-    exec(pure_code)
-    func = locals()["solution_function"]  # 假设生成的代码定义了一个名为solution_function的函数
+    namespace = {}
+    exec(pure_code,namespace)
+    func = namespace["solution_function"]  # 假设生成的代码定义了一个名为solution_function的函数
     for test in test_cases:
         input_data = test["input"]
         expected_output = test["output"]

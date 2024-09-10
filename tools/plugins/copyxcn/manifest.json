@@ -1,0 +1,17 @@
+{
+  "name": "Copy XDN",
+  "version": "1.0",
+  "description": "不登录依然可以在某SDN页面进行代码复制！",
+  "manifest_version": 3,
+  "action": {
+    "default_title": "Copy, 某SDN!",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["/js/content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

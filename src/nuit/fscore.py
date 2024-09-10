@@ -123,11 +123,11 @@ def rmain():
         #    "C://Users//jinya//Desktop//2024_2成绩汇总//人机对话//21级智能1班//11、学生期末考核大作业登记表及成绩.xlsx",
            "C://Users//jinya//Desktop//2024_2成绩汇总//人机对话//21级智能2班//11、学生期末考核大作业登记表及成绩.xlsx",
            ]
-    weights = [25, 25, 60]
+    weights = [50,50]
     rscore = functools.partial(sscore, weights=weights)
-    for fn in lst:
-        main(fn,rscore=rscore, strg="11、期末考核大作业成绩.xlsx", arg="合计", num=len(weights))
-    fn = "C://Users//jinya//Desktop//2024_2成绩汇总//智能前沿//11、学生期末考核大作业登记表及成绩.xlsx"
+    # for fn in lst:
+    #     main(fn,rscore=rscore, strg="11、期末考核大作业成绩.xlsx", arg="合计", num=len(weights))
+    fn = "C://Users//jinya//Desktop//课件//CS3528_项目实训【2022级】【人工智能】//11、学生期末考核大作业登记表及成绩.xlsx"
     main(fn, rscore=rscore,strg="11、期末考核大作业成绩.xlsx", arg="合计", num=len(weights))
 
 
