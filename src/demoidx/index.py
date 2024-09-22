@@ -48,14 +48,21 @@ def get_title(code):
 def vindex(fpath="/Volumes/Extreme SSD/name/白石桃"):
     for root, dirs, files in os.walk(fpath):
         findex = os.path.join(root, "index.txt")
-        titles = []
+        titles, caches = [], {}
+        if os.path.exists(findex):
+            with open(findex) as fp:
+                for line in fp:
+                    values = line.split()
+                    if len(values)>1:
+                        key, value = line.split(maxsplit=1)
+                        caches[key] = value
         for f in sorted(files):
             fname = os.path.join(root,f)
             if f.endswith(".mp4") and not f.startswith(".") and not os.path.islink(fname):
                 name = f.split(".")[0]
                 name = name.upper().strip()
-                title = get_title(name)
-                print(f, title, name)
+                title = get_title(name) if name not in caches else caches[name]
+                print(title, name)
                 if title:
                     titles.append(title)
         print(root)
@@ -82,35 +89,36 @@ def find(key, fpath="/Users/john/Downloads"):
 
 def symlink(fpath="/Volumes/Extreme SSD/name", target="/Volumes/Extreme SSD/nuit/"):
     fnames = {}
+    for root, dirs, files in os.walk(target):
+        for f in files:
+            kname = f.split(".")[0].strip().upper()
+            src = os.path.join(root, f)
+            if not f.startswith("."):
+                fnames[kname] = src
     for root, dirs, files in os.walk(fpath):
         for f in files:
             if f == "index.txt":
                 findex = os.path.join(root,f)
                 with open(findex) as fp:
                     for line in fp:
-                        if line.strip():
-                            fname = line.strip().split()[0].upper()
-                            fnames[fname]=root
-    for root, dirs, files in os.walk(target):
-        for f in files:
-            kname = f.split(".")[0].strip().upper()
-            src = os.path.join(root, f)
-            if kname in fnames and not f.startswith(".") and not os.path.islink(src):
-                link = os.path.join(fnames[kname], f)
-                if not os.path.exists(link):
-                    os.symlink(src, link)
-
-
-
-
+                        if not line.strip():
+                            continue
+                        kname = line.strip().split()[0].upper()
+                        link = os.path.join(root, f"{kname}.mp4")
+                        if kname in fnames:
+                            src = fnames[kname]
+                            if not os.path.exists(link):
+                                print(src, link)
+                                os.symlink(src, link)
 
 
 if __name__ == '__main__':
     # print(get_title("020"))
-    # vindex(fpath=f"/Volumes/Extreme SSD/nuit/MIRD")
-    # for name in ["ssni","hmn"]:
+    # vindex(fpath=f"/Volumes/Extreme SSD/cache")
+    # for name in ["fsdss"]:
     #     vindex(fpath=f"/Volumes/Extreme SSD/nuit/{name}")
-    find(key="觉醒", fpath="/Volumes/Extreme SSD/nuit") #
+    find(key="", fpath="/Volumes/Extreme SSD/nuit") #
+    # symlink(fpath="/Volumes/PortableSSD/name",target="/Volumes/PortableSSD/nuit/")
     # symlink()
 
 
