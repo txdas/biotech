@@ -121,14 +121,14 @@ def rmain():
         # "C://Users//jinya//Desktop//2024_2成绩汇总//情感分析//21级智能1班//11、学生期末考核大作业登记表及成绩.xlsx",
         #    "C://Users//jinya//Desktop//2024_2成绩汇总//情感分析//21级智能2班//11、学生期末考核大作业登记表及成绩.xlsx",
         #    "C://Users//jinya//Desktop//2024_2成绩汇总//人机对话//21级智能1班//11、学生期末考核大作业登记表及成绩.xlsx",
-           "C://Users//jinya//Desktop//2024_2成绩汇总//人机对话//21级智能2班//11、学生期末考核大作业登记表及成绩.xlsx",
+        #    "C:\Users\jinya\Desktop\课件\CS3528_项目实训【2022级】【人工智能】\考核材料袋\6、过程考核项2：项目实施过程.xlsx",
            ]
-    weights = [50,50]
+    weights = [33.33,33.33,33.33]
     rscore = functools.partial(sscore, weights=weights)
     # for fn in lst:
     #     main(fn,rscore=rscore, strg="11、期末考核大作业成绩.xlsx", arg="合计", num=len(weights))
-    fn = "C://Users//jinya//Desktop//课件//CS3528_项目实训【2022级】【人工智能】//11、学生期末考核大作业登记表及成绩.xlsx"
-    main(fn, rscore=rscore,strg="11、期末考核大作业成绩.xlsx", arg="合计", num=len(weights))
+    fn = "C://Users//jinya//Desktop//课件//CS3528_项目实训【2022级】【人工智能】//考核材料袋//6、过程考核项2：项目实施过程.xlsx"
+    main(fn, rscore=rscore,strg="6项目实施过程.xlsx", arg="合计", num=len(weights))
 
 
 if __name__ == '__main__':
