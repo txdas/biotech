@@ -1,0 +1,17 @@
+# pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+tensorflow
+scikit-learn
+tqdm
+pandas
+jupyterlab
+notebook
+ipywidgets
+torchinfo
+seaborn
+keras_tuner
+Levenshtein
+pybktree
+biopython
+kipoi
+kipoiseq
+umap-learn

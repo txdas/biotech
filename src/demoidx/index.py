@@ -117,9 +117,9 @@ if __name__ == '__main__':
     # vindex(fpath=f"/Volumes/Extreme SSD/cache")
     # for name in ["fsdss"]:
     #     vindex(fpath=f"/Volumes/Extreme SSD/nuit/{name}")
-    find(key="", fpath="/Volumes/Extreme SSD/nuit") #
+    # find(key="凪ひかる", fpath="/Volumes/Extreme SSD/nuit") #
     # symlink(fpath="/Volumes/PortableSSD/name",target="/Volumes/PortableSSD/nuit/")
-    # symlink()
+    symlink()
 
 
 

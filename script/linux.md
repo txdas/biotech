@@ -26,8 +26,8 @@ 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
 - host: 113.64.244.23:1204
 - user：jinyalong qs*@*a$8Rn
 ```bash
-scp -r -P 1204 models jinyalong@113.64.244.23:/data/home/jinyalong/notebook/models
-rsync -av -e 'ssh -p 1204' jinyalong@113.64.244.23:/data/home/jinyalong/notebook/models /Users/john/data/
+scp -r -P 1204 dna/* jinyalong@113.64.244.23:/data/home/jinyalong/notebook/dna
+rsync -av -e 'ssh -p 1204' jinyalong@113.64.244.23:/data/home/jinyalong/data/sev_241001/results/core6-merge_core /Users/john/data/Promter/results/core6-merge_core
 cat DNA2.csv | grep "AACACGGG***TT" | awk -F, '{sum += $3};END {print sum}'
 scp -P 1204 jinyalong@113.64.244.23:/data/home/jinyalong/data/sev_240624/results/fs*.csv ./
 ```
