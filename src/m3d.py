@@ -2,15 +2,11 @@ import pandas as pd
 import numpy as np
 import torch
 import matplotlib as mpl
-import scipy.stats as stats
-from sklearn import preprocessing
-import seaborn as sns
 import umap
 from torch import nn, optim,utils
 import matplotlib.pyplot as plt
 from scipy.interpolate import griddata
 from sklearn.preprocessing import MinMaxScaler
-from Bio.Seq import Seq
 
 
 
@@ -108,11 +104,11 @@ pdf,input_x = e_train, train_x
 mname = name.split("_")[0].lower()
 model = torch.load(f"{fdata}/models/{name}.pt")
 wmodel=WrapModel(model)
-layer_out, pred=wmodel.extract_layer_output(torch.Tensor(input_x),"linear") # linear, conv1 conv2 conv3
+layer_out, pred=wmodel.extract_layer_output(torch.Tensor(input_x),"conv2") # linear, conv1 conv2 conv3
 current = 0
-grid_x, grid_y = np.mgrid[0:1:200j, 0:1:200j]
+grid_x, grid_y = np.mgrid[0:1:100j, 0:1:100j]
 scores = pred.flatten()
-reducer = umap.UMAP(low_memory=True,n_neighbors=6, min_dist=0.8, n_components=2, metric="euclidean")
+reducer = umap.UMAP(densmap=True,low_memory=True,n_neighbors=15, min_dist=0.1, n_components=2, metric="euclidean")
 conv_output_reduce = reducer.fit_transform(layer_out)
 conv_output_reduce = MinMaxScaler().fit_transform(conv_output_reduce)
 index = pdf[pdf.seq == wt].index[0]
