@@ -27,5 +27,12 @@
 - https://storrs.io/enformer/
 - https://www.biorxiv.org/content/10.1101/2021.04.07.438649v1.full.pdf
 - https://github.com/google-deepmind/deepmind-research/tree/master/enformer
+- https://github.com/lucidrains/enformer-pytorch/
+
+# 参考材料
+- GWAS系列： https://zhuanlan.zhihu.com/p/667352071
+- 单核苷酸多态性（SNP）： https://zhuanlan.zhihu.com/p/141497068
+- 表达数量性状位点（eQTL）： https://zhuanlan.zhihu.com/p/378403055
+- GTEx： https://www.gtexportal.org/home/downloads/adult-gtex/qtl
 
 
