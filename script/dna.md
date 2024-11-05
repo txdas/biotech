@@ -29,6 +29,10 @@
 - https://github.com/google-deepmind/deepmind-research/tree/master/enformer
 - https://github.com/lucidrains/enformer-pytorch/
 
+# Polygraph: A Software Framework for the Systematic Assessment of Synthetic Regulatory DNA Elements
+- https://www.biorxiv.org/content/10.1101/2023.11.27.568764v1.full.pdf
+- https://github.com/Genentech/polygraph
+
 # 参考材料
 - GWAS系列： https://zhuanlan.zhihu.com/p/667352071
 - 单核苷酸多态性（SNP）： https://zhuanlan.zhihu.com/p/141497068
