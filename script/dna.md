@@ -33,6 +33,11 @@
 - https://www.biorxiv.org/content/10.1101/2023.11.27.568764v1.full.pdf
 - https://github.com/Genentech/polygraph
 
+# 可解释性之积分梯度算法（Integrated Gradients）
+  - http://home.ustc.edu.cn/~liujunyan/blog/Integrated-Gradients-IG/
+  - [Captum Tutorials](https://captum.ai/tutorials/)
+  - [可解释性之积分梯度算法（Integrated Gradients）](https://zhuanlan.zhihu.com/p/428131762)
+
 # 参考材料
 - GWAS系列： https://zhuanlan.zhihu.com/p/667352071
 - 单核苷酸多态性（SNP）： https://zhuanlan.zhihu.com/p/141497068
