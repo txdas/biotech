@@ -4,15 +4,11 @@ import pandas as pd
 import numpy as np
 import torch
 import matplotlib as mpl
-import scipy.stats as stats
-from sklearn import preprocessing
-import seaborn as sns
 import umap
 from torch import nn, optim,utils
 import matplotlib.pyplot as plt
 from scipy.interpolate import griddata
 from sklearn.preprocessing import MinMaxScaler
-from Bio.Seq import Seq
 
 
 
@@ -110,14 +106,24 @@ mpl.rcParams['figure.dpi'] = 120
 pdf,input_x = e_test, test_x
 # pdf,input_x = e_train, train_x
 mname = name.split("_")[0].lower()
+<<<<<<< HEAD
 model_dir = os.path.abspath(f"{fdata}/models/{name}.pt")
 model = torch.load(model_dir)
 wmodel = WrapModel(model)
 layer_out, pred=wmodel.extract_layer_output(torch.Tensor(input_x),"conv1") # linear, conv1 conv2 conv3
+=======
+model = torch.load(f"{fdata}/models/{name}.pt")
+wmodel=WrapModel(model)
+layer_out, pred=wmodel.extract_layer_output(torch.Tensor(input_x),"conv2") # linear, conv1 conv2 conv3
+>>>>>>> 755d5336d6a5ec86eb7538d24a5a4d80822fa8af
 current = 0
-grid_x, grid_y = np.mgrid[0:1:200j, 0:1:200j]
+grid_x, grid_y = np.mgrid[0:1:100j, 0:1:100j]
 scores = pred.flatten()
+<<<<<<< HEAD
 reducer = umap.UMAP(low_memory=True,n_neighbors=20, min_dist=0.5, n_components=2, metric="euclidean")
+=======
+reducer = umap.UMAP(densmap=True,low_memory=True,n_neighbors=15, min_dist=0.1, n_components=2, metric="euclidean")
+>>>>>>> 755d5336d6a5ec86eb7538d24a5a4d80822fa8af
 conv_output_reduce = reducer.fit_transform(layer_out)
 conv_output_reduce = MinMaxScaler().fit_transform(conv_output_reduce)
 index = pdf[pdf.seq == wt].index[0]
