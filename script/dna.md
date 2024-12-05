@@ -10,7 +10,11 @@
 
 # Dirichlet Diffusion Score Model for Biological Sequence Generation
 - https://arxiv.org/pdf/2305.10699
-- https://github.com/jzhoulab/ddsm/tree/main
+- https://github.com/jzhoulab/ddsm
 
 # DNA-Diffusion: Leveraging Generative Models for Controlling Chromatin Accessibility and Gene Expression via Synthetic Regulatory Elements
 - https://www.biorxiv.org/content/biorxiv/early/2024/02/01/2024.02.01.578352.full.pdf
+
+# ANALOG BITS: GENERATING DISCRETE DATA USING DIFFUSION MODELS WITH SELF-CONDITIONING
+- https://arxiv.org/pdf/2208.04202
+- https://github.com/google-research/pix2seq

@@ -1,3 +1,5 @@
+import os.path
+
 import pandas as pd
 import numpy as np
 import torch
@@ -88,31 +90,34 @@ def one_hot_encode(df, col='seq', seq_len=44):
         vectors[i] = a
     return vectors
 
-name,seq_len,suff="INFL_0522",26,"" # 0.94,0.94,0.95
-fdata = "/Users/john/data"
+# name,seq_len,suff="INFL_0522",26,"" # 0.94,0.94,0.95
+# wt = "AGCAAAAGCAGGGTGACAAAAACATA" # INFL
+
+name,seq_len,suff="VEE_0816",44,"_tol_seq" # 0.83,0.83,0.82
+wt = "atgggcggcgcatgagagaagcccagaccaattacctacccaaa".upper() # INFL
+
+fdata = "C:/Users/jinya/Desktop/bio"
 datadir=f"{fdata}/5UTR/{name}_"
-e_train = pd.read_csv(f"{datadir}train{suff}.csv")
-e_test= pd.read_csv(f"{datadir}test{suff}.csv")
-wt = "AGCAAAAGCAGGGTGACAAAAACATA"
-elen = e_test.shape[0]
-e_test.loc[elen]=["wt", wt,0, 0,0,0,0,0, 0.32, 0.32]
-# e_train = e_train.sample(2000).reindex()
-elen = e_train.shape[0]
-e_train.loc[elen]=["wt", wt,0, 0,0,0,0,0, 0.32, 0.32]
+e_train = pd.read_csv(f"{datadir}train{suff}.csv")[["seq"]]
+e_test= pd.read_csv(f"{datadir}test{suff}.csv")[["seq"]]
+e_wt = pd.DataFrame({"seq":[wt]})
+e_train = pd.concat((e_train,e_wt))
+e_test= pd.concat((e_train,e_wt))
 
 train_x = one_hot_encode(e_train,seq_len=seq_len)
 test_x = one_hot_encode(e_test, seq_len=seq_len)
 mpl.rcParams['figure.dpi'] = 120
-# pdf,input_x = e_test, test_x
-pdf,input_x = e_train, train_x
+pdf,input_x = e_test, test_x
+# pdf,input_x = e_train, train_x
 mname = name.split("_")[0].lower()
-model = torch.load(f"{fdata}/models/{name}.pt")
-wmodel=WrapModel(model)
-layer_out, pred=wmodel.extract_layer_output(torch.Tensor(input_x),"linear") # linear, conv1 conv2 conv3
+model_dir = os.path.abspath(f"{fdata}/models/{name}.pt")
+model = torch.load(model_dir)
+wmodel = WrapModel(model)
+layer_out, pred=wmodel.extract_layer_output(torch.Tensor(input_x),"conv1") # linear, conv1 conv2 conv3
 current = 0
 grid_x, grid_y = np.mgrid[0:1:200j, 0:1:200j]
 scores = pred.flatten()
-reducer = umap.UMAP(low_memory=True,n_neighbors=6, min_dist=0.8, n_components=2, metric="euclidean")
+reducer = umap.UMAP(low_memory=True,n_neighbors=20, min_dist=0.5, n_components=2, metric="euclidean")
 conv_output_reduce = reducer.fit_transform(layer_out)
 conv_output_reduce = MinMaxScaler().fit_transform(conv_output_reduce)
 index = pdf[pdf.seq == wt].index[0]

@@ -1,9 +1,11 @@
 # Jupyter 远程登录
 
-```bash
+````bash`
 ps -ef | grep jinya | grep jupyter | awk '{ print $2 }' | xargs kill -9
 nohup jupyter notebook --no-browser --port=8080 2>&1 &
+nohup jupyter notebook --no-browser --port=8989 2>&1 &
 ssh -L 8080:localhost:8080 jinyalong@113.64.244.23 -p 1204
+--no-dependencies
 ```
 # Jupyter 设置密码
 ## 利用ipython配置密码
@@ -29,5 +31,5 @@ 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
 scp -r -P 1204 dna/* jinyalong@113.64.244.23:/data/home/jinyalong/notebook/dna
 rsync -av -e 'ssh -p 1204' jinyalong@113.64.244.23:/data/home/jinyalong/data/sev_241001/results/core6-merge_core /Users/john/data/Promter/results/core6-merge_core
 cat DNA2.csv | grep "AACACGGG***TT" | awk -F, '{sum += $3};END {print sum}'
-scp -P 1204 jinyalong@113.64.244.23:/data/home/jinyalong/data/sev_240624/results/fs*.csv ./
+scp -P 1204 jinyalong@113.64.244.23:/data/home/jinyalong/data/5UTR ./
 ```
