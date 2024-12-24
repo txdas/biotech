@@ -5,11 +5,18 @@ from ete3 import Tree, TreeStyle
 
 proxies = {
     'http': 'http://127.0.0.1:33210',
-    'https': 'http://127.0.0.1:33210'
+    'https': 'http://127.0.0.1:33210',
+    'all_proxy': 'socks5://127.0.0.1:33210'
 }
 headers = {
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.66 Safari/537.36"
+    "if-modified-since":"Wed, 04 Dec 2024 11:03:27 GMT",
+    "priority":"u=0, i",
+    "cookie":"user_uuid=cff7fa10-0bd8-4d9f-9aa5-30cb81a9b8d5; _ga=GA1.1.1603870572.1710306902;",
+    "cache-control":"max-age=0",
+    "accept-language":"zh-CN,zh;q=0.9",
+    "accept-encoding":"gzip, deflate, br, zstd",
+    "Accept": "text/html,application/xhtml+xml,application/xml",
+    "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 "
 }
 
 
@@ -26,7 +33,7 @@ def _fetch(url, xpath, extra=None):
 
 
 def get_title(code):
-    url = f"https://missav.com/dm46/cn/{code}"
+    url = f"https://missav.com/dm35/cn/{code}"
     xpath = "/html/head/meta[@property='og:title']"
     node = _fetch(url, xpath)
     title = node.attrib.get("content", "") if node is not None and hasattr(node,"attrib")  else ""
@@ -49,13 +56,13 @@ def vindex(fpath="/Volumes/Extreme SSD/name/白石桃"):
     for root, dirs, files in os.walk(fpath):
         findex = os.path.join(root, "index.txt")
         titles, caches = [], {}
-        if os.path.exists(findex):
-            with open(findex) as fp:
-                for line in fp:
-                    values = line.split()
-                    if len(values)>1:
-                        key, value = line.split(maxsplit=1)
-                        caches[key] = value
+        # if os.path.exists(findex):
+        #     with open(findex) as fp:
+        #         for line in fp:
+        #             values = line.split()
+        #             if len(values)>1:
+        #                 key, value = line.split(maxsplit=1)
+        #                 caches[key] = value
         for f in sorted(files):
             fname = os.path.join(root,f)
             if f.endswith(".mp4") and not f.startswith(".") and not os.path.islink(fname):
@@ -113,13 +120,13 @@ def symlink(fpath="/Volumes/Extreme SSD/name", target="/Volumes/Extreme SSD/nuit
 
 
 if __name__ == '__main__':
-    # print(get_title("020"))
-    # vindex(fpath=f"/Volumes/Extreme SSD/cache")
+    print(get_title("JUQ-614"))
+    # vindex(fpath=f"/Volumes/Extreme SSD/nuit")
     # for name in ["fsdss"]:
     #     vindex(fpath=f"/Volumes/Extreme SSD/nuit/{name}")
     # find(key="凪ひかる", fpath="/Volumes/Extreme SSD/nuit") #
     # symlink(fpath="/Volumes/PortableSSD/name",target="/Volumes/PortableSSD/nuit/")
-    symlink()
+    # symlink()
 
 
 
