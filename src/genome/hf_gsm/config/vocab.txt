@@ -1,0 +1,13 @@
+<cls>
+<pad>
+<eos>
+<unk>
+A
+C
+G
+T
+U
+.
+-
+<null_1>
+<mask>
