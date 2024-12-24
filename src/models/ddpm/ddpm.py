@@ -19,6 +19,7 @@ import logging.config
 import time
 import tensorflow as tf
 from sklearn.preprocessing import normalize
+
 from tensorflow.keras.datasets import mnist
 from tensorflow.keras.layers import Dense, Dropout, Input
 from tensorflow.keras.models import Model, Sequential

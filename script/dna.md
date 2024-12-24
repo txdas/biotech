@@ -9,10 +9,14 @@
 
 # Dirichlet Diffusion Score Model for Biological Sequence Generation
 - https://arxiv.org/pdf/2305.10699
-- https://github.com/jzhoulab/ddsm/tree/main
+- https://github.com/jzhoulab/ddsm
 
 # DNA-Diffusion: Leveraging Generative Models for Controlling Chromatin Accessibility and Gene Expression via Synthetic Regulatory Elements
 - https://www.biorxiv.org/content/biorxiv/early/2024/02/01/2024.02.01.578352.full.pdf
+
+# ANALOG BITS: GENERATING DISCRETE DATA USING DIFFUSION MODELS WITH SELF-CONDITIONING
+- https://arxiv.org/pdf/2208.04202
+- https://github.com/google-research/pix2seq
 
 # Sequential regulatory activity prediction across chromosomes with convolutional neural networks
 - https://pmc.ncbi.nlm.nih.gov/articles/PMC5932613/pdf/739.pdf
@@ -43,5 +47,4 @@
 - 单核苷酸多态性（SNP）： https://zhuanlan.zhihu.com/p/141497068
 - 表达数量性状位点（eQTL）： https://zhuanlan.zhihu.com/p/378403055
 - GTEx： https://www.gtexportal.org/home/downloads/adult-gtex/qtl
-
 
