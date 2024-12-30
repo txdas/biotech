@@ -51,8 +51,8 @@ class PositionalEncoding(nn.Module):
         self.register_buffer("pos_encoding", pos_encoding)
 
     def forward(self, x):
-        # print(x.shape,self.pos_encoding[:, :x.size(1)].shape)
-        pos_embeddings = self.pos_encoding[:, :x.size(1)].transpose(0, 1).unsqueeze(0)
+        # print(x.shape,self.pos_encoding[:x.size(1),:].shape)
+        pos_embeddings = self.pos_encoding[:x.size(1),:].unsqueeze(0)
         # print(pos_embeddings.shape)
         x = x + pos_embeddings
         return self.dropout(x)
@@ -99,31 +99,32 @@ class RNABERT(nn.Module):
         return output
 
 class ConvBERT(nn.Module):
-    def __init__(self, dim_model, num_heads, dropout_p):
+    def __init__(self, dim_model, num_heads, dropout_p,max_len=10):
         super().__init__()
         self.dim_model = dim_model
-        self.embedding = ContextEmbedding(6,dim_model,kernel_size=5)
-        self.positional_encoder = PositionalEncoding(dim_model=dim_model, dropout_p=dropout_p, max_len=128)
+        self.embedding = ContextEmbedding(8,dim_model,kernel_size=3)
+        self.positional_encoder = PositionalEncoding(dim_model=dim_model, dropout_p=dropout_p, max_len=max_len)
         self.encoder_layer = nn.TransformerEncoderLayer(dim_model,nhead=num_heads
                                                         ,dim_feedforward=4*dim_model, dropout=dropout_p)
         self.norm = nn.LayerNorm(dim_model)
         self.encoder = nn.TransformerEncoder(encoder_layer=self.encoder_layer,num_layers=3, norm=self.norm)
-        self.out = nn.Linear(dim_model, 1)
+        self.out = nn.Linear(dim_model*max_len, 1)
 
     def forward(self, x):   # N
+        bs = x.shape[0]
         x= self.embedding(x.permute(0,2,1)) # N,C,D
         x = self.positional_encoder(x.permute(0,2,1) * math.sqrt(self.dim_model))
         x = x.permute(1, 0, 2)
         x = self.encoder_layer(x)
-        output = self.out(x)
+        output = self.out(x.reshape(bs, -1))
         return output
 
 
 if __name__ == '__main__':
-    x = torch.randint(0,6,(4, 118))
-    model = RNABERT(dim_model=128, num_heads=8, dropout_p=0.2)
-    # x = torch.rand((4,118,6))
-    # model = ConvBERT(dim_model=128, num_heads=8, dropout_p=0.2)
+    # x = torch.randint(0,6,(4, 118))
+    # model = RNABERT(dim_model=128, num_heads=8, dropout_p=0.2)
+    x = torch.rand((4,20,8))
+    model = ConvBERT(dim_model=128, num_heads=8, dropout_p=0.2,max_len=20)
     torchinfo.summary(model,input_data=x)
 
 
