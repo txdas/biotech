@@ -45,7 +45,7 @@ class PositionalEncoding(nn.Module):
         self.dropout = nn.Dropout(dropout_p)
         pos_encoding = torch.zeros(max_len, dim_model)
         positions_list = torch.arange(0, max_len, dtype=torch.float).view(-1, 1)  # 0, 1, 2, 3, 4, 5
-        division_term = torch.exp(torch.arange(0, dim_model, 2).float() * (-math.log(10000.0)) / dim_model)
+        division_term = torch.exp(torch.arange(0, dim_model, 2).float() * (-math.log(1000.0)) / dim_model)
         pos_encoding[:, 0::2] = torch.sin(positions_list * division_term)
         pos_encoding[:, 1::2] = torch.cos(positions_list * division_term)
         self.register_buffer("pos_encoding", pos_encoding)
@@ -102,7 +102,7 @@ class ConvBERT(nn.Module):
     def __init__(self, dim_model, num_heads, dropout_p,max_len=10):
         super().__init__()
         self.dim_model = dim_model
-        self.embedding = ContextEmbedding(8,dim_model,kernel_size=3)
+        self.embedding = ContextEmbedding(8,dim_model,kernel_size=2)
         self.positional_encoder = PositionalEncoding(dim_model=dim_model, dropout_p=dropout_p, max_len=max_len)
         self.encoder_layer = nn.TransformerEncoderLayer(dim_model,nhead=num_heads
                                                         ,dim_feedforward=4*dim_model, dropout=dropout_p)
