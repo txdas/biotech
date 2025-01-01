@@ -1,5 +1,6 @@
 import torch
 import lightning as L
+import torch.nn.functional as F
 
 class BaseModel(L.LightningModule):
     def __init__(self):
