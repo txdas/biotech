@@ -22,8 +22,8 @@ class CNN(nn.Module):
         self.act = nn.ReLU()
         self.pool = nn.MaxPool1d(2, stride=2)
         self.dropout = nn.Dropout(p=0.3)
-        # self.bn = nn.BatchNorm1d(200)
-        self.bn = nn.LayerNorm(self.seq_len//4)
+        self.bn = nn.BatchNorm1d(200)
+        # self.bn = nn.LayerNorm(self.seq_len//4)
         self.linear = nn.Linear(200 *(self.seq_len//4) ,100)
         self.output = nn.Linear(100 ,1)
 

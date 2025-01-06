@@ -19,7 +19,8 @@ def set_seed(random_seed=41):
 
 def one_hot_encode(df, col='seq', seq_len=44):
     # Dictionary returning one-hot encoding of nucleotides.
-    nuc_d = {'a': [1, 0, 0, 0], 'c': [0, 1, 0, 0], 'g': [0, 0, 1, 0], 't': [0, 0, 0, 1], 'n': [0, 0, 0, 0]}
+    nuc_d = {'a': [1,0,0,0], 'c': [0,1,0,0], 'g': [0,0,1,0],
+             't': [0, 0, 0,1],'u': [0, 0, 0,1], 'n': [0, 0, 0, 0]}
 
     # Creat empty matrix.
     vectors = np.empty([len(df), seq_len, 4])
