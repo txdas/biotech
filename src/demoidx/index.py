@@ -118,12 +118,12 @@ def symlink(fpath="/Volumes/Extreme SSD/name", target="/Volumes/Extreme SSD/nuit
 
 if __name__ == '__main__':
     # print(get_title("JUQ-614"))
-    vindex(fpath=f"/Volumes/Extreme SSD/nuit/stars")
+    # vindex(fpath=f"/Volumes/Extreme SSD/nuit/stars")
     # for name in ["fsdss"]:
     #     vindex(fpath=f"/Volumes/Extreme SSD/nuit/{name}")
-    # find(key="秘书", fpath="/Volumes/Extreme SSD/nuit/jul") #
+    # find(key="车", fpath="/Volumes/Extreme SSD/nuit/") #
     # symlink(fpath="/Volumes/PortableSSD/name",target="/Volumes/PortableSSD/nuit/")
-    # symlink()
+    symlink()
 
 
 
